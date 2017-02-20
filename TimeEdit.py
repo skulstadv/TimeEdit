@@ -77,11 +77,9 @@ end_time = sys.argv[5]
 # Create cookie from arg1 (username) and arg2 (password)
 cookie = create_cookie(username, password)
 # Get the room id from arg3
-#room = get_room_ID(room)
-# USING ROOM NUMBER AS ARGUMENT INSTAED BCUZ OF INDEX ERROR WITH ROOM 062
-room = room + '.185' 
+room = get_room_ID(room)
 # Create the data field of the request
-data = create_data_dict(username, 15, room, start_time, end_time)
+data = create_data_dict(username, 5, room, start_time, end_time)
 
 # URL is static
 url = 'https://no.timeedit.net/web/hig/db1/student/r.html?h=t&sid=5&id=-1&step=2&id=-1&dates=20170219&datesEnd=20170219&startTime=11%3A00&endTime=11%3A05&o=162177.185%2C8%2C+A267%2C+grupperom&nocache=3'
