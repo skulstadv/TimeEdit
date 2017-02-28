@@ -11,7 +11,7 @@ from selenium import webdriver
 # Help function, called when there are invalid arguments
 
 def help():
-	print '\nUsage: python TimeEdit.py -u -p -r -s -e\nSends a curl request to using [-u] username, [-p] password, [-r] room, [-s] start-time, [-e] end-time\n\t-u\tYour feide username\n\t-p\tYour feide password\n\t-r\tRoom number [A266, A267, A268, A269, A270]\n\t-s\tStart-time\n\t-e\tEnd-time\n\tExample: python TimeEdit.py user password A266 08:00 18:00\n' 
+	print '\nUsage: python TimeEdit.py -u -p -r -s -e\nSends a curl request to book a room using [-u] username, [-p] password, [-r] room, [-s] start-time, [-e] end-time\n\t-u\tYour feide username\n\t-p\tYour feide password\n\t-r\tRoom number [A062, A266, A267, A268, A269, A270]\n\t-s\tStart-time\n\t-e\tEnd-time\n\tExample: python TimeEdit.py user password A266 08:00 18:00\n' 
 	return
 
 # Grab logincookie using selenium with chrome webdriver  (phantomjs does not work)
@@ -44,7 +44,10 @@ def  get_room_ID(room):
 	room_ID[269] = "162179"
 	room_ID[270] = "162180"
 	room_ID[300] = '161930'
-	room = str(room_ID[int(room[1:4])]) + '.185'
+	if room != "A062":
+		room = str(room_ID[int(room[1:4])]) + '.185'
+	else:
+		room = str(161156.185)
 	return room
 
 # Create data dictionary to pass along with request. First arg is days ahead in time
