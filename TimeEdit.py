@@ -100,4 +100,11 @@ while ("innenfor dato- og klokkeslettgrensene" in answer):
 	answer = r.text.encode('UTF-8')
 	i += 1
 	print 'It isnt past midnight yet, trying again...'
-print answer
+print answer;
+
+# Writes response to file named according to date of reservation attempted
+date = datetime.date.today() + datetime.timedelta(days=15)
+f = open(str(date), 'w')
+f.write(answer + '\n');
+f.write(answer);
+f.close();
