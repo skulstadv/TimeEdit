@@ -6,7 +6,7 @@ if [ "$(id -u)" != "0" ]; then
 else
 	apt-get -qq update
 	apt-get -qqy install python-pip python-dev build-essential xvfb chromium-chromedriver
-	pip install selenium pyvirtualdisplay requests
+	pip install -r requirements.txt
 	printf "\n\nFinishing...\nDo you want to add the script to crontab? [y/n]: "
 	read ANSWER
 	if [[ "$ANSWER" == "y" ]]; then
