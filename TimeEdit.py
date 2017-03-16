@@ -77,12 +77,14 @@ password = sys.argv[2]
 room = sys.argv[3]
 start_time = sys.argv[4]
 end_time = sys.argv[5]
+# Days ahead to book the room. You should always use 15
+days_ahead = 15
 # Create cookie from arg1 (username) and arg2 (password)
 cookie = create_cookie(username, password)
 # Get the room id from arg3
 room = get_room_ID(room)
 # Create the data field of the request
-data = create_data_dict(username, 15, room, start_time, end_time)
+data = create_data_dict(username, days_ahead, room, start_time, end_time)
 
 # URL is static
 url = 'https://no.timeedit.net/web/hig/db1/student/r.html?h=t&sid=5&id=-1&step=2&id=-1&dates=20170219&datesEnd=20170219&startTime=11%3A00&endTime=11%3A05&o=162177.185%2C8%2C+A267%2C+grupperom&nocache=3'
@@ -95,16 +97,23 @@ headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KH
 r = requests.post(url = url, headers = headers, data = data)
 answer = r.text.encode('UTF-8')
 i = 0
+# Writes response to file named according to date of reservation attempted
+date_reservation = datetime.date.today() + datetime.timedelta(days=days_ahead)
+# Open file for writing log
+f = open(str(date_reservation) + "-" + sys.argv[3] + ".log", 'w')
+date_of_execution = datetime.datetime.today()
+f.write("Date executed: " + str(date_of_execution) + '\n')
+# Loop until booking successfull or message about already taken in response
 while ("innenfor dato- og klokkeslettgrensene" in answer):
 	r = requests.post(url = url, headers = headers, data = data)
 	answer = r.text.encode('UTF-8')
+	# Write response to file
+	f.write(str(datetime.datetime.now()) + '\t' +  answer + '\n')
 	i += 1
+    time.sleep(100) 
 	print 'It isnt past midnight yet, trying again...'
 print answer
-
-# Writes response to file named according to date of reservation attempted
-date = datetime.date.today() + datetime.timedelta(days=15)
-f = open(str(date), 'w')
-f.write(answer + '\n')
-f.write(answer)
+# Write answer to file in case while loop never runs
+f.write("\n" + str(datetime.datetime.now()) + '\t' +  answer + '\n')
+# Close file before exiting
 f.close()
