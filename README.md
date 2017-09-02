@@ -5,7 +5,7 @@ Room numbers would have to be updated to use this script in other places than Hi
 Same goes for URL used with selenium and requests. 
 
 ##To grab selenium URL:
-  * Log in to where you make reservations, delete the the TEwebhigdb1 cookie
+  * Log in to where you make reservations, delete the TEwebhigdb1 cookie
   * F5, copy the URL "Student" points to. Use this for selenium.
 
 ##To grab room numbers and URL for making reservation:
