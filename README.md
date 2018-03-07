@@ -1,6 +1,7 @@
 # TimeEdit
 Automatic room reservation script for HIG time-edit website
 
+# Outdated, NTNU switched system used for reservations. See https://github.com/skulstadv/NTNU-Roomshark for updated version.
 Room numbers would have to be updated to use this script in other places than HiG.
 Same goes for URL used with selenium and requests. 
 
