@@ -7,7 +7,7 @@ else
 	apt-get -qq update
 	apt-get -qqy install python-pip python-dev build-essential xvfb chromium-chromedriver
 	pip install -r requirements.txt
-	printf "\n\nFinishing...\nDo you want to add the script to crontab? [y/n]: "
+	printf "\nDo you want to add the script to crontab? [y/n]: "
 	read ANSWER
 	if [[ "$ANSWER" == "y" ]]; then
 		printf "Generating reservation for 15 days ahead in. Will run and book every MON-SAT \n"
